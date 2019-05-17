@@ -1,0 +1,184 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Регистратура</title>
+
+    <!-- Bootstrap core CSS -->
+    <!--<link rel="stylesheet" href="/lib2/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="/js/script.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+</head>
+
+<body onload="loadZapis();">
+   
+    <div class="container">
+        <!--Header-->
+        <div class="d-flex flex-md-row p-3 px-md-4 mb-3 text-light bg-dark fixed-top border-bottom box-shadow">
+            <h5 class="my-0 mr-md-auto font-weight-bold">Министерство Здравоохранения</h5>
+            <h2 class="my-0 mr-md-auto font-weight-bold">Добро пожаловать!</h2>
+
+            <button onclick="location.reload();" type="button" class='btn btn-success'>Обновить страницу</button>
+            <button class="btn btn-primary" onclick="window.location='https://localhost:44382/rasp.html'">Расписание</button>
+            <button class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModal">Войти</button>
+            <button id="inbtn" onclick="logOff();" class="btn btn-danger">Выйти</button>
+            <button class="btn btn-primary" onclick="window.location='https://localhost:44382/register.html'">Регистрация</button>
+
+        </div>
+        <!--End Header-->
+        <!--Main-->
+        <div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="msgClass">
+                <div id="msgAuth"></div>
+                <div id="msg"></div>
+                <ul id="formError"></ul>
+            </div>
+            <div id="actionMsg" class="msgClass"></div>
+            <hr>
+            <h2>Список записей</h2>
+
+            <div class="row">
+                <div class="col-md-12 shadow-sm text-light bg-secondary" id="zapisDiv"></div>
+
+            </div>
+            <div id="scroll"></div>
+            <hr>
+
+            <br>
+            <p class="lead">Оцените сервис</p>
+
+
+            <span class="likebtn-wrapper" data-lang="ru" data-identifier="item_1"></span>
+            <script>(function (d, e, s) { if (d.getElementById("likebtn_wjs")) return; a = d.createElement(e); m = d.getElementsByTagName(e)[0]; a.async = 1; a.id = "likebtn_wjs"; a.src = s; m.parentNode.insertBefore(a, m) })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>
+            <p class="lead"></p>
+
+            <div class="row">
+                <div class="col-6">
+                    <h2>Запись на прием</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="createURL">URL</label>
+                            <input id="createURL" class="form-control" type="text" required>
+                            <label for="createDate">Дата записи</label>
+                            <input id="createDate" class="form-control" type="text" required>
+                            <label for="createTime">Время записи</label>
+                            <input id="createTime" class="form-control" type="text" required>
+                            <label for="createKabinet">Кабинет</label>
+                            <input id="createKabinet" class="form-control" type="text" required>
+                            <label for="createFIO">ФИО пациента</label>
+                            <input id="createFIO" class="form-control" type="text" required>
+                            <label for="createPolis">Полис</label>
+                            <input id="createPolis" class="form-control" type="text" required>
+                            <label for="createAdres">Адрес</label>
+                            <input id="createAdres" class="form-control" type="text" required>
+                        </div>
+                        <button onclick="createZapis();" type="submit" class="btn btn-primary">Записаться на прием</button>
+                    </form>
+                </div>
+
+                <div class="col-6">
+                    <div id="editDiv">
+                        <h2>Изменение записи</h2>
+
+                        <form class="form-group">
+                            <input type="hidden" id="edit-id" class="form-control" visibility-hidden required>
+
+                            <!--<label for="edit-url">URL</label>
+                    <input type="text" id="edit-url" class="form-control" required>-->
+                            <label for="edit-date">Дата записи</label>
+                            <input type="text" id="edit-date" class="form-control" required>
+                            <label for="edit-time">Время записи</label>
+                            <input type="text" id="edit-time" class="form-control" required>
+                            <label for="edit-kabinet">Кабинет</label>
+                            <input type="text" id="edit-kabinet" class="form-control" required>
+                            <label for="edit-fio"></label>
+                            <input type="hidden" id="edit-fio" class="form-control" required>
+                            <label for="edit-polis"></label>
+                            <input type="hidden" id="edit-polis" class="form-control" required>
+                            <label for="edit-adres"></label>
+                            <input type="hidden" id="edit-adres" class="form-control" required>
+                            <br>
+                            <button onclick="updateZapis();" class="btn btn-success">Сохранить</button>
+                            <button onclick="closeInput();" class="btn btn-warning">Отмена</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--End Main-->
+        <!--Footer-->
+        <br>
+        <a href="#" title="Вернуться к началу" class="topbutton">Наверх</a>
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+
+            <div class="row">
+                <div class="col-12 col-md">
+                    <small class="d-block mb-3 text-muted">Ярослав Сабуров</small>
+                    <small class="d-block mb-3 text-muted">&copy; 2019</small>
+                </div>
+            </div>
+        </footer>
+        <!--End Footer-->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Вход для зарегестрированных пользователей</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="msgClass">
+                                <div id="msgAuth"></div>
+                                <div id="msg"></div>
+                                <ul id="formError"></ul>
+                            </div>
+                            <div>
+                                <label for="Email">Email: </label><br />
+                                <input type="text" id="Email" name="Email" class="form-control" required>
+                            </div>
+                            <div>
+                                <label for="Password">Пароль: </label><br />
+                                <input type="password" id="Password" name="Password" class="form-control" required>
+                            </div>
+                        </form>
+                        <br>
+                        <button onclick="logIn();" class="btn btn-primary">Войти</button>
+                        <button onclick="logOff();" class="btn btn-danger">Выйти</button>
+                    </div>
+                    <!--<div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <!--End Modal-->
+    </div> <!-- /container -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

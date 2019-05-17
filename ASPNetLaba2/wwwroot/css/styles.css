@@ -1,0 +1,43 @@
+﻿body, html {
+    background-image: url("123123.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: auto;
+    background-attachment: fixed;
+    background-color: #C0C0C0;
+}
+
+.msgClass {
+    color: red;
+}
+
+#editDiv {
+    display: none;
+}
+
+.blogText {
+    padding: 5px;
+    font-weight: bold;
+}
+
+button {
+    margin-left: 5px;
+}
+
+.topbutton {
+    width: 100px;
+    border: 2px solid #ccc;
+    background: #f7f7f7;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+    color: #333;
+    font-family: verdana;
+    font-size: 12px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
